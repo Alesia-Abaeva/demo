@@ -29,6 +29,19 @@ export function PhotoCard({ photo, width }: PhotoCardProps) {
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         loading="lazy"
       />
+        {/* Overlay on hover */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-end">
+          <div className="p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 w-full">
+            <p className="text-white text-sm font-medium line-clamp-1">
+              {photo.user.name}
+            </p>
+            {photo.description && (
+              <p className="text-white/80 text-xs mt-0.5 line-clamp-2">
+                {photo.description}
+              </p>
+            )}
+          </div>
+        </div>
       </div>
     </a>
   )
