@@ -2,7 +2,14 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black">
+      <header className="sticky top-0 z-10 backdrop-blur-sm border-b border-gray-100 px-6 py-4 ">
+        <div className="max-w-screen-2xl  mx-auto flex items-center justify-between">
+          <h1 className="text-lg font-semibold ">Unsplash Demo Gallery</h1>
+          <span className="text-sm text-gray-400">50 photos loaded</span>
+        </div>
+      </header>
+     
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
