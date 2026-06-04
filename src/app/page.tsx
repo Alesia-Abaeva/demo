@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -10,18 +9,13 @@ export default function Home() {
         </div>
       </header>
      
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
+      <main className=" max-w-screen-2xl
+      flex flex-1 w-full flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black 
+      sm:items-start">
+        <div>Massonrt</div>
+        <div>Loading</div>
+        <p className="text-center text-sm text-gray-400 py-8">End of list</p>
 
-        </div>
       </main>
     </div>
   );
