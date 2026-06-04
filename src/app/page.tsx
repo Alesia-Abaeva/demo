@@ -33,7 +33,7 @@ export default function Home() {
         </div>
       </header>
      
-      <main className=" max-w-screen-2xl
+      <main className=" max-w-screen-2xl mx-auto
       flex flex-1 w-full flex-col items-center justify-between p p-16 bg-white dark:bg-black 
       sm:items-start">
         <MasonryGallery photos={photos} loading={loading && photos.length === 0} />

@@ -1,6 +1,9 @@
 'use client'
 
 import React from 'react'
+import { debounce } from '@/shared/utils/debounce'
+import { PhotoCard } from '../PhotoCard'
+import { useColumnLayout } from '@/shared/hooks/useColumnLayout'
 import {
   AutoSizer,
   CellMeasurer,
@@ -10,14 +13,8 @@ import {
   WindowScroller,
   type MasonryCellProps,
 } from 'react-virtualized'
-
-// import { useColumnLayout } from '@/hooks/useColumnLayout'
-// import { debounce } from '@/utils/debounce'
-// import type { UnsplashPhoto } from '@/types/unsplash'
 import { UnsplashPhoto } from '@/shared/types/unsplash'
-import { debounce } from '@/shared/utils/debounce'
-import { PhotoCard } from '../PhotoCard'
-import { useColumnLayout } from '@/shared/hooks/useColumnLayout'
+
 
 type MasonryGalleryProps = {
   photos: UnsplashPhoto[]
@@ -30,7 +27,6 @@ function MasonryGallery({ photos, loading }: MasonryGalleryProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const masonryRef = React.useRef<Masonry>(null)
   const widthRef = React.useRef<number>(0)
-  const [containerWidth, setContainerWidth] = React.useState(0)
 
   const { layout, calculateLayout } = useColumnLayout()
   const { columns, columnWidth } = layout
@@ -89,20 +85,20 @@ function MasonryGallery({ photos, loading }: MasonryGalleryProps) {
     if (width) {
       calculateLayout(width)
       widthRef.current = width
-      setContainerWidth(width) 
     }
   }, [calculateLayout])
 
-  const onResize = React.useCallback(
-    () =>
-       
-      debounce(({ width }: { width: number }) => {
-        if (widthRef.current !== width) {
-          widthRef.current = width
-          resetPositioner(width)
-        }
-      }, 150),
-    [resetPositioner]
+
+  const onResize = React.useMemo(
+  () =>
+    // eslint-disable-next-line react-hooks/refs
+    debounce(({ width }: { width: number }) => {
+      if (widthRef.current !== width) {
+        widthRef.current = width
+        resetPositioner(width)
+      }
+    }, 150),
+  [resetPositioner]
   )
 
   const [skeletonHeights] = React.useState(() =>
@@ -158,7 +154,7 @@ function MasonryGallery({ photos, loading }: MasonryGalleryProps) {
                 cellRenderer={cellRenderer}
                 height={height}
                 scrollTop={scrollTop}
-                width={containerWidth || 800}
+                width={widthRef.current || 800}
               />
             )}
           </AutoSizer>
